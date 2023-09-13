@@ -19,6 +19,8 @@ function divide(numOne, numTwo){
 }
 
 function operate(numOne, numTwo, operator){
+    numOne = Number(numOne);
+    numTwo = Number(numTwo);
     switch(operator){
         case "+":
             return add(numOne, numTwo);
@@ -34,12 +36,13 @@ function operate(numOne, numTwo, operator){
 }
 
 
-let numOne = 0;
-let numTwo = 0;
-let operator = "";
+
 let displayNum = "0";
+let storedNum = " ";
+let storedOperater = null;
 
 let displayElem = document.getElementById("display");
+let displayStoredElem = document.getElementById("displayStored");
 
 
 let buttons = document.querySelectorAll(".button");
@@ -49,19 +52,52 @@ buttons.forEach((element) => {
 
 function buttonClicked(event){
     const button = event.target;
-    let currentDisplayString = "0";
     if(button.classList.contains("number")){
         currentDisplayString = displayElem.innerText;
-        if(currentDisplayString == "0"){
+        if(displayNum == "0"){
             if(button.id != "0"){
-                currentDisplayString = button.id;
+                displayNum = button.id;
             }
-        } else{
-            currentDisplayString += button.id;
+        } else if(Number(displayNum)){
+            displayNum += button.id;
+        } else if (storedOperater != null || displayNum == "ERROR"){
+            displayNum = button.id;
         }
-    }else{
-
+    }else if(button.classList.contains("operator")){
+        if(storedNum == " "){
+            if(displayNum == "ERROR"){
+                console.log("error");
+                storedNum = "0";  
+            } else{
+                storedNum = displayNum;
+            }
+            storedOperater = button.id;
+            displayNum = "0";
+        } else if(storedOperater != null){
+            if(displayNum == "0"){
+                storedOperater = button.id;
+                displayNum = "0";
+            } else{
+                storedNum = operate(storedNum, displayNum, storedOperater);
+                storedOperater = button.id;
+                displayNum = "0";
+            }
+        }
+    } else if (button.id == "="){
+        displayNum = operate(storedNum, displayNum, storedOperater);
+        storedOperater = null;
+        storedNum = " ";
+    } else if (button.id == "C"){
+        displayNum = "0";
+        storedNum = " ";
+        storedOperater = null;
     }
 
-    displayElem.innerText = currentDisplayString;
+    displayElem.innerText = displayNum;
+    if(storedOperater != null){
+        displayStoredElem.innerText = storedNum + storedOperater;
+    } else{
+        displayStoredElem.innerText = storedNum;
+    }
+     
 }

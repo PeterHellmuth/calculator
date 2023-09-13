@@ -55,10 +55,11 @@ h1{
     border-bottom-width: 0px;
 }
 
-#display {
+#display, #displayStored{
     font-size: 35px;
     text-align: right;
     margin: 0px;
+    height: 40px;
     padding: 8px;
     padding-right: 20px;
 }
