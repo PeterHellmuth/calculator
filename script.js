@@ -37,8 +37,31 @@ function operate(numOne, numTwo, operator){
 let numOne = 0;
 let numTwo = 0;
 let operator = "";
+let displayNum = "0";
 
-console.log(operate(5, 7, "+"));
-console.log(subtract(25,20));
-console.log(multiply(5.5,7));
-console.log(divide(5.5,7));
+let displayElem = document.getElementById("display");
+
+
+let buttons = document.querySelectorAll(".button");
+buttons.forEach((element) => {
+    element.addEventListener("click", buttonClicked);
+});
+
+function buttonClicked(event){
+    const button = event.target;
+    let currentDisplayString = "0";
+    if(button.classList.contains("number")){
+        currentDisplayString = displayElem.innerText;
+        if(currentDisplayString == "0"){
+            if(button.id != "0"){
+                currentDisplayString = button.id;
+            }
+        } else{
+            currentDisplayString += button.id;
+        }
+    }else{
+
+    }
+
+    displayElem.innerText = currentDisplayString;
+}
