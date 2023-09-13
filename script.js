@@ -19,20 +19,31 @@ function divide(numOne, numTwo){
 }
 
 function operate(numOne, numTwo, operator){
+
     numOne = Number(numOne);
     numTwo = Number(numTwo);
+    let returnNum = "";
     switch(operator){
         case "+":
-            return add(numOne, numTwo);
+            returnNum = add(numOne, numTwo);
+            break;
         case "-":
-            return subtract(numOne, numTwo);
+            returnNum = subtract(numOne, numTwo);
+            break;
         case "x":
-            return multiply(numOne, numTwo);
+            returnNum = multiply(numOne, numTwo);
+            break;
         case "÷":
-            return divide(numOne, numTwo);
-        default:
-            return "ERROR";
+            returnNum = divide(numOne, numTwo);
+            break;
     }
+
+    if(returnNum.toString().length > maxDisplayLength){
+        return (Math.round(returnNum*100000)/100000).toExponential(5);
+    } else{
+        return returnNum;
+    }
+
 }
 
 
@@ -63,9 +74,14 @@ function buttonClicked(event){
         } else if(Number(displayNum)){
             if(displayNum.length < maxDisplayLength){
                 displayNum += button.id;
+            } else{
+                displayNum = button.id;
             }
         } else if (storedOperater != null || displayNum == "ERROR" || displayNum == zeroError){
             displayNum = button.id;
+        } else if(storedOperater == null){
+            displayNum = button.id;
+            
         }
     }else if(button.classList.contains("operator")){
         if(storedNum == " "){
