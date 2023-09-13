@@ -1,6 +1,17 @@
 body {
     display: flex;
     flex-direction: column;
+    width: 445px;
+    margin: 100px auto;
+}
+
+h1{
+    border-style: solid;
+    border-bottom-width: 0px;
+    border-color: grey;
+    background-color: lightgray;
+    margin: 0px;
+    width: 445px;
 }
 
 .button-container {
@@ -8,6 +19,8 @@ body {
     flex-direction: column;
     background-color: lightgray;
     width: 445px;
+    border-style: solid;
+    border-color: grey;
 }
 
 .button-row {
@@ -30,4 +43,18 @@ body {
 
 .button:hover {
     background-color: lightblue;
+}
+
+
+.display-container{
+    width: 445px;
+    border-style: solid;
+    border-color: grey;
+    border-bottom-width: 0px;
+}
+
+#display {
+    font-size: 25px;
+    text-align: right;
+    margin: 0px;
 }
