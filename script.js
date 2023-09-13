@@ -36,7 +36,7 @@ function operate(numOne, numTwo, operator){
 }
 
 
-let zeroError = "Nice try, but not today!"
+let zeroError = "Nice try!"
 let displayNum = "0";
 let storedNum = " ";
 let storedOperater = null;
