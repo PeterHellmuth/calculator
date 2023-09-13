@@ -40,7 +40,7 @@ let zeroError = "Nice try, but not today!"
 let displayNum = "0";
 let storedNum = " ";
 let storedOperater = null;
-const maxDisplayLength = 23;
+const maxDisplayLength = 16;
 
 
 let displayElem = document.getElementById("display");
