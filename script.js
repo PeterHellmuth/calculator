@@ -12,7 +12,7 @@ function multiply(numOne, numTwo){
 
 function divide(numOne, numTwo){
     if(numTwo == 0){
-        return "ERROR";
+        return zeroError;
     } else{
         return numOne/numTwo;
     }
@@ -36,10 +36,12 @@ function operate(numOne, numTwo, operator){
 }
 
 
-
+let zeroError = "Nice try, but not today!"
 let displayNum = "0";
 let storedNum = " ";
 let storedOperater = null;
+const maxDisplayLength = 23;
+
 
 let displayElem = document.getElementById("display");
 let displayStoredElem = document.getElementById("displayStored");
@@ -59,14 +61,15 @@ function buttonClicked(event){
                 displayNum = button.id;
             }
         } else if(Number(displayNum)){
-            displayNum += button.id;
-        } else if (storedOperater != null || displayNum == "ERROR"){
+            if(displayNum.length < maxDisplayLength){
+                displayNum += button.id;
+            }
+        } else if (storedOperater != null || displayNum == "ERROR" || displayNum == zeroError){
             displayNum = button.id;
         }
     }else if(button.classList.contains("operator")){
         if(storedNum == " "){
-            if(displayNum == "ERROR"){
-                console.log("error");
+            if(displayNum == "ERROR" || displayNum == zeroError){
                 storedNum = "0";  
             } else{
                 storedNum = displayNum;
@@ -84,9 +87,13 @@ function buttonClicked(event){
             }
         }
     } else if (button.id == "="){
-        displayNum = operate(storedNum, displayNum, storedOperater);
-        storedOperater = null;
-        storedNum = " ";
+        if(Number(storedNum) || storedNum == "0"){
+            console.log(storedNum);
+            console.log(displayNum);
+            displayNum = operate(storedNum, displayNum, storedOperater);
+            storedOperater = null;
+            storedNum = " ";
+        }
     } else if (button.id == "C"){
         displayNum = "0";
         storedNum = " ";
@@ -94,10 +101,11 @@ function buttonClicked(event){
     }
 
     displayElem.innerText = displayNum;
+    
     if(storedOperater != null){
         displayStoredElem.innerText = storedNum + storedOperater;
     } else{
         displayStoredElem.innerText = storedNum;
-    }
+     }
      
 }
