@@ -50,6 +50,7 @@ function operate(numOne, numTwo, operator){
 let zeroError = "Nice try!"
 let displayNum = "0";
 let storedNum = " ";
+let calculatedResult = false;
 let storedOperater = null;
 const maxDisplayLength = 16;
 
@@ -67,21 +68,26 @@ function buttonClicked(event){
     const button = event.target;
     if(button.classList.contains("number")){
         currentDisplayString = displayElem.innerText;
-        if(displayNum == "0"){
-            if(button.id != "0"){
-                displayNum = button.id;
-            }
-        } else if(Number(displayNum)){
-            if(displayNum.length < maxDisplayLength){
-                displayNum += button.id;
-            } else{
-                displayNum = button.id;
-            }
-        } else if (storedOperater != null || displayNum == "ERROR" || displayNum == zeroError){
+        if(calculatedResult){
             displayNum = button.id;
-        } else if(storedOperater == null){
-            displayNum = button.id;
-            
+            calculatedResult = false;
+        } else{
+            if(displayNum == "0"){
+                if(button.id != "0"){
+                    displayNum = button.id;
+                }
+            } else if(Number(displayNum)){
+                if(displayNum.length < maxDisplayLength){
+                    displayNum += button.id;
+                } else{
+                    displayNum = button.id;
+                }
+            } else if (storedOperater != null || displayNum == "ERROR" || displayNum == zeroError){
+                displayNum = button.id;
+            } else if(storedOperater == null){
+                displayNum = button.id;
+                
+            }
         }
     }else if(button.classList.contains("operator")){
         if(storedNum == " "){
@@ -109,6 +115,7 @@ function buttonClicked(event){
             displayNum = operate(storedNum, displayNum, storedOperater);
             storedOperater = null;
             storedNum = " ";
+            calculatedResult = true;
         }
     } else if (button.id == "C"){
         displayNum = "0";
