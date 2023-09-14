@@ -41,6 +41,7 @@ h1{
     justify-content: center;
     font-size: 25px;
     background-color: white;
+    user-select: none;
 }
 
 .button:hover {

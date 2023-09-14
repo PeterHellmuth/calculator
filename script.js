@@ -79,8 +79,6 @@ function buttonClicked(event){
             } else if(Number(displayNum)){
                 if(displayNum.length < maxDisplayLength){
                     displayNum += button.id;
-                } else{
-                    displayNum = button.id;
                 }
             } else if (storedOperater != null || displayNum == "ERROR" || displayNum == zeroError){
                 displayNum = button.id;
